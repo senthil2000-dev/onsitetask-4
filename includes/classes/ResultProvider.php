@@ -22,10 +22,11 @@ class ResultProvider {
         $query->execute();
         $html="";
         while($row = $query->fetch(PDO::FETCH_ASSOC)) {
+            $stud=new Student($this->con, $row["id"]);
             $name = $row["name"];
             $roll = $row["rollno"];
-            $department = $row["department"];
-            $degree = $row["degree"];
+            $department = $stud->getFormatDepartment();
+            $degree = $stud->getFormatDegree();
             $html.="<div class='resultBox'>
                         <span>Name: $name</span>
                         <span>Roll no: $roll</span>
